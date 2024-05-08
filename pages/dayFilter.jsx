@@ -4,7 +4,7 @@ import Spinner from "@/components/Spinner";
 import { useRouter } from "next/router";
 
 
-const dayFilter = () => {
+const DayFilter = () => {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,7 +13,7 @@ const dayFilter = () => {
   const fetchRecords = async () => {
     try {
       setIsLoading(true);
-      const { query } = router;
+      //const { query } = router;
       let response = await getRecords();
       response = response.filter((el) =>  el.day === filter);
         
@@ -146,4 +146,4 @@ const dayFilter = () => {
   );
 };
 
-export default dayFilter;
+export default DayFilter;
