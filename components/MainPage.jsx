@@ -19,7 +19,15 @@ const MainPage = () => {
       setIsLoading(false);
     }
   };
-
+const navigateToDay = (day) => {
+  router.push(`/dayFilter?filter=${day}`);
+};
+const navigateHome = () => {
+  router.push(`/`);
+};
+const navigateToCreate = () => {
+  router.push(`/create`);
+}
   const handleDeleteRecord = async (id) => {
     try {
       const response = await deleteRecord(id);
@@ -45,34 +53,67 @@ const MainPage = () => {
   if (isLoading) return <Spinner />;
 
   return (
+    <div>
+            
+
+        <nav className="navbar">
+            <button className="nav-button add-button" onClick={() => navigateHome()}>All</button>
+            <button className="nav-button" onClick={() => navigateToDay('monday')}>Monday</button>
+            <button className="nav-button" onClick={() => navigateToDay('tuesday')}>Tuesday</button>
+            <button className="nav-button" onClick={() => navigateToDay('wednesday')}>Wednesday</button>
+            <button className="nav-button" onClick={() => navigateToDay('thursday')}>Thursday</button>
+            <button className="nav-button" onClick={() => navigateToDay('friday')}>Friday</button>
+            <button className="nav-button" onClick={() => navigateToDay('saturday')}>Saturday</button>
+            <button className="nav-button" onClick={() => navigateToDay('sunday')}>Sunday</button>
+            <button className="nav-button add-button" onClick={() => navigateToCreate()}>Add</button>
+        </nav>
     <div className="p-4 flex flex-wrap gap-4">
       {data?.map((record) => (
         <div
           key={record._id}
           className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
         >
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {record.name}
-          </h5>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            {record.description}
-          </p>
-          <button
-            type="button"
-            onClick={() => handleEditRecord(record._id)}
-            className="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            onClick={() => handleDeleteRecord(record._id)}
-            className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
-          >
-            Delete
-          </button>
+            <img
+                src={record.image}
+                alt="Missing"
+                className="w-full h-auto rounded-t-lg"
+            />
+
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                {record.name}
+            </h5>
+
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                Description: {record.description}
+            </p>
+
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                Genre: {record.genre}
+            </p>
+
+            <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                Show date: {record.day}
+            </p>
+
+            <div className="p-5 flex justify-center">
+                <button
+                type="button"
+                onClick={() => handleEditRecord(record._id)}
+                className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
+                >
+                Update
+                </button>
+                <button
+                type="button"
+                onClick={() => handleDeleteRecord(record._id)}
+                className="text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                >
+                Delete
+                </button>
+            </div>
         </div>
       ))}
+    </div>
     </div>
   );
 };

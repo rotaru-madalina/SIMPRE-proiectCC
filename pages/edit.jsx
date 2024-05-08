@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { defaultRecordValues } from "@/utils/constants";
-import { getRecord, updateRecord } from "@/utils/recordsFunctions";
+import { getRecordById, updateRecord } from "@/utils/recordsFunctions";
 import Spinner from "@/components/Spinner";
 import RecordForm from "@/components/RecordForm";
 
@@ -13,7 +13,7 @@ const Edit = () => {
 
   const handleGetRecord = async (id) => {
     try {
-        const response = await getRecord(id);
+        const response = await getRecordById(id);
 
         if (response) {
             setEntry(response);

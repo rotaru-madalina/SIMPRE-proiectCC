@@ -17,12 +17,10 @@ const RecordForm = (props) => {
   return (
     <div className="p-4">
       <div className="flex flex-col mx-auto max-w-80 border p-4 shadow-sm gap-4 w-full">
-        <div className="text-center font-bold text-xl">{entry._id ? 'Update' : 'Create new'} Record</div>
+        <div className="text-center font-bold text-xl">{entry._id ? 'Update' : 'Create new'} Movie</div>
+        
         <div>
-          <label
-            htmlFor="name"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
+          <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
             Name
           </label>
           <input
@@ -31,15 +29,13 @@ const RecordForm = (props) => {
             value={data.name}
             onChange={(e) => handleChange("name", e.target.value)}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Name placeholder"
+            placeholder="Movie name"
             required
           />
         </div>
+
         <div>
-          <label
-            htmlFor="description"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
+          <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
             Description
           </label>
           <textarea
@@ -48,9 +44,67 @@ const RecordForm = (props) => {
             value={data.description}
             onChange={(e) => handleChange("description", e.target.value)}
             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Write your thoughts here..."
+            placeholder="Movie description"
           ></textarea>
         </div>
+
+        <div>
+            <label htmlFor="genre" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
+            Genre
+            </label>
+            <select
+            id="genre"
+            value={data.genre}
+            onChange={(e) => handleChange("genre", e.target.value)}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+            <option value="animation">Animation</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="history">History</option>
+            <option value="adventure">Adventure</option>
+            <option value="sci-fi">Sci-fi</option>
+            <option value="drama">Drama</option>
+            <option value="family">Family</option>
+            </select>
+        </div>
+
+        <div>
+            <label htmlFor="day" className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
+            Show Day
+            </label>
+            <select
+            id="day"
+            value={data.day}
+            onChange={(e) => handleChange("day", e.target.value)}
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+            <option value="monday">Monday</option>
+            <option value="tuesday">Tuesday</option>
+            <option value="wednesday">Wednesday</option>
+            <option value="thursday">Thursday</option>
+            <option value="friday">Friday</option>
+            <option value="saturday">Saturday</option>
+            <option value="sunday">Sunday</option>
+            </select>
+        </div>
+
+        <div>
+          <label
+            htmlFor="image"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
+          >
+            Image
+          </label>
+          <textarea
+            id="image"
+            rows="4"
+            value={data.image}
+            onChange={(e) => handleChange("image", e.target.value)}
+            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            placeholder="Image src"
+          ></textarea>
+        </div>
+
         <div className="flex justify-center">
           <button
             type="button"

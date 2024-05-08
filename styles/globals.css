@@ -2,3 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+.navbar {
+  display: flex;
+  justify-content: space-evenly;
+  position: sticky;
+  top: 0;
+  background-color: #333;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.nav-button {
+  padding: 10px 20px;
+  color: white;
+  background-color: #555;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: #777;
+}
+
+.add-button {
+  background-color: green; /* Different color for the add button */
+}
+
+.filter-button {
+  background-color: rgb(95, 121, 44); /* Different color for the add button */
+}
+
+.filter-button:hover {
+  background-color: yellowgreen;
+}
+
+.add-button:hover {
+  background-color: darkgreen;
+}
+
+.content {
+  padding: 20px;
+  height: 2000px; /* Just for demonstration */
+}
