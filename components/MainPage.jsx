@@ -7,11 +7,14 @@ const MainPage = () => {
   const router = useRouter();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { filter } = router.query;
 
   const fetchRecords = async () => {
     try {
-      const response = await getRecords();
-
+      let response = await getRecords();
+      if(filter)
+        response = response.filter((el) =>  el.day === filter);
+        
       setData(response);
       setIsLoading(false);
     } catch (error) {
@@ -20,7 +23,7 @@ const MainPage = () => {
     }
   };
 const navigateToDay = (day) => {
-  router.push(`/dayFilter?filter=${day}`);
+  router.push(`/?filter=${day}`);
 };
 const navigateHome = () => {
   router.push(`/`);
@@ -48,7 +51,7 @@ const navigateToCreate = () => {
 
   useEffect(() => {
     fetchRecords();
-  }, []);
+  }, [filter]);
 
   if (isLoading) return <Spinner />;
 
@@ -56,15 +59,15 @@ const navigateToCreate = () => {
     <div>
             
 
-        <nav className="navbar">
+            <nav className="navbar">
             <button className="nav-button add-button" onClick={() => navigateHome()}>All</button>
-            <button className="nav-button" onClick={() => navigateToDay('monday')}>Monday</button>
-            <button className="nav-button" onClick={() => navigateToDay('tuesday')}>Tuesday</button>
-            <button className="nav-button" onClick={() => navigateToDay('wednesday')}>Wednesday</button>
-            <button className="nav-button" onClick={() => navigateToDay('thursday')}>Thursday</button>
-            <button className="nav-button" onClick={() => navigateToDay('friday')}>Friday</button>
-            <button className="nav-button" onClick={() => navigateToDay('saturday')}>Saturday</button>
-            <button className="nav-button" onClick={() => navigateToDay('sunday')}>Sunday</button>
+            <button className={`nav-button ${filter === 'monday' ? 'filter-button' : ''}`} onClick={() => navigateToDay('monday')}>Monday</button>
+            <button className={`nav-button ${filter === 'tuesday' ? 'filter-button' : ''}`} onClick={() => navigateToDay('tuesday')}>Tuesday</button>
+            <button className={`nav-button ${filter === 'wednesday' ? 'filter-button' : ''}`} onClick={() => navigateToDay('wednesday')}>Wednesday</button>
+            <button className={`nav-button ${filter === 'thursday' ? 'filter-button' : ''}`} onClick={() => navigateToDay('thursday')}>Thursday</button>
+            <button className={`nav-button ${filter === 'friday' ? 'filter-button' : ''}`} onClick={() => navigateToDay('friday')}>Friday</button>
+            <button className={`nav-button ${filter === 'saturday' ? 'filter-button' : ''}`} onClick={() => navigateToDay('saturday')}>Saturday</button>
+            <button className={`nav-button ${filter === 'sunday' ? 'filter-button' : ''}`} onClick={() => navigateToDay('sunday')}>Sunday</button>
             <button className="nav-button add-button" onClick={() => navigateToCreate()}>Add</button>
         </nav>
     <div className="p-4 flex flex-wrap gap-4">
